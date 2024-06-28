@@ -1,0 +1,940 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Author" content="Mukesh Yaragopu">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 186.5px 0.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: justify; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 15.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Times New Roman'; color: #1d262b; -webkit-text-stroke: #1d262b}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Times New Roman'; color: #1d262b; -webkit-text-stroke: #1d262b; min-height: 15.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Courier New'; -webkit-text-stroke: #000000}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Courier New'; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p11 {margin: 0.0px 0.0px 0.0px 72.0px; text-indent: -72.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p12 {margin: 0.0px 0.0px 0.0px 108.0px; text-indent: -108.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p13 {margin: 0.0px 0.0px 0.0px 36.0px; text-align: justify; text-indent: -36.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p14 {margin: 0.0px 0.0px 0.0px 72.0px; text-align: justify; text-indent: -72.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p15 {margin: 0.0px 0.0px 0.0px 108.0px; text-align: justify; text-indent: -108.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p16 {margin: 0.0px 0.0px 0.0px 144.0px; text-align: justify; text-indent: -144.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: justify; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 15.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px Times; font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b>1. Simulate the following CPU scheduling algorithms</b></span></p>
+<p class="p2"><span class="s1"><b>a) FCFS<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p2"><span class="s1"><b>b) SJF (Premptive, Non Premptive)<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p2"><span class="s1"><b>c)<span class="Apple-converted-space">  </span>Priority (Premptive, Non Premptive)<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p2"><span class="s1"><b>d) Round Robin</b></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>a) FCFS</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">int bt[20], wt[20], tat[20], i, n;</span></p>
+<p class="p4"><span class="s1">float wtavg, tatavg;</span></p>
+<p class="p4"><span class="s1">printf("\nEnter the number of processes --<span class="Apple-converted-space">  </span>");</span></p>
+<p class="p4"><span class="s1">scanf("%d", &amp;n);</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">printf("\nEnter Burst Time for Process %d --<span class="Apple-converted-space">  </span>", i);</span></p>
+<p class="p4"><span class="s1">scanf("%d", &amp;bt[i]);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">wt[0] = wtavg = 0;</span></p>
+<p class="p4"><span class="s1">tat[0] = tatavg = bt[0];</span></p>
+<p class="p4"><span class="s1">for(i=1;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">wt[i] = wt[i-1] +bt[i-1];</span></p>
+<p class="p4"><span class="s1">tat[i] = tat[i-1] +bt[i];</span></p>
+<p class="p4"><span class="s1">wtavg = wtavg + wt[i];</span></p>
+<p class="p4"><span class="s1">tatavg = tatavg + tat[i];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">printf("\t PROCESS \tBURST TIME \t WAITING TIME\t TURNAROUND TIME\n");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">printf("\n\t P%d \t\t %d \t\t %d \t\t %d", i, bt[i], wt[i], tat[i]);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Waiting Time -- %f", wtavg/n);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Turnaround Time -- %f", tatavg/n);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>b) SJF</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">int p[20], bt[20], wt[20], tat[20], i, k, n, temp;</span></p>
+<p class="p4"><span class="s1">float wtavg, tatavg;</span></p>
+<p class="p4"><span class="s1">printf("\nEnter the number of processes --<span class="Apple-converted-space">  </span>");</span></p>
+<p class="p4"><span class="s1">scanf("%d", &amp;n);</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">p[i]=i;</span></p>
+<p class="p4"><span class="s1">printf("Enter Burst Time for Process %d --<span class="Apple-converted-space">  </span>", i);</span></p>
+<p class="p4"><span class="s1">scanf("%d", &amp;bt[i]);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">for(k=i+1;k&lt;n;k++)</span></p>
+<p class="p4"><span class="s1">if(bt[i]&gt;bt[k])</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">temp=bt[i];</span></p>
+<p class="p4"><span class="s1">bt[i]=bt[k];</span></p>
+<p class="p4"><span class="s1">bt[k]=temp;</span></p>
+<p class="p4"><span class="s1">temp=p[i];</span></p>
+<p class="p4"><span class="s1">p[i]=p[k];</span></p>
+<p class="p4"><span class="s1">p[k]=temp;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">wt[0] = wtavg = 0;</span></p>
+<p class="p4"><span class="s1">tat[0] = tatavg = bt[0];</span></p>
+<p class="p4"><span class="s1">for(i=1;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">wt[i] = wt[i-1] +bt[i-1];</span></p>
+<p class="p4"><span class="s1">tat[i] = tat[i-1] +bt[i];</span></p>
+<p class="p4"><span class="s1">wtavg = wtavg + wt[i];</span></p>
+<p class="p4"><span class="s1">tatavg = tatavg + tat[i];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">printf("\n\t PROCESS \tBURST TIME \t WAITING TIME\t TURNAROUND TIME\n");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">printf("\n\t P%d \t\t %d \t\t %d \t\t %d", p[i], bt[i], wt[i], tat[i]);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Waiting Time -- %f", wtavg/n);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Turnaround Time -- %f", tatavg/n);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>c) PRIORITY</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">int p[20],bt[20],pri[20], wt[20],tat[20],i, k, n, temp;</span></p>
+<p class="p4"><span class="s1">float wtavg, tatavg;</span></p>
+<p class="p4"><span class="s1">printf("Enter the number of processes<span class="Apple-converted-space">  </span>---<span class="Apple-converted-space">  </span>");</span></p>
+<p class="p4"><span class="s1">scanf("%d",&amp;n);</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">p[i] = i;</span></p>
+<p class="p4"><span class="s1">printf("Enter the Burst Time &amp; Priority of Process %d ---<span class="Apple-converted-space">  </span>",i);</span></p>
+<p class="p4"><span class="s1">scanf("%d %d",&amp;bt[i], &amp;pri[i]);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">for(k=i+1;k&lt;n;k++)</span></p>
+<p class="p4"><span class="s1">if(pri[i] &gt; pri[k])</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">temp=p[i];</span></p>
+<p class="p4"><span class="s1">p[i]=p[k];</span></p>
+<p class="p4"><span class="s1">p[k]=temp;</span></p>
+<p class="p4"><span class="s1">temp=bt[i];</span></p>
+<p class="p4"><span class="s1">bt[i]=bt[k];</span></p>
+<p class="p4"><span class="s1">bt[k]=temp;</span></p>
+<p class="p4"><span class="s1">temp=pri[i];</span></p>
+<p class="p4"><span class="s1">pri[i]=pri[k];</span></p>
+<p class="p4"><span class="s1">pri[k]=temp;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">wtavg = wt[0] = 0;</span></p>
+<p class="p4"><span class="s1">tatavg = tat[0] = bt[0];</span></p>
+<p class="p4"><span class="s1">for(i=1;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">wt[i] = wt[i-1] + bt[i-1];</span></p>
+<p class="p4"><span class="s1">tat[i] = tat[i-1] + bt[i];</span></p>
+<p class="p4"><span class="s1">wtavg = wtavg + wt[i];</span></p>
+<p class="p4"><span class="s1">tatavg = tatavg + tat[i];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">printf("\nPROCESS\t\tPRIORITY\tBURST TIME\tWAITING TIME\tTURNAROUND TIME");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">printf("\n%d \t\t %d \t\t<span class="Apple-converted-space">  </span>%d \t\t %d \t\t %d ",p[i],pri[i],bt[i],wt[i],tat[i]);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Waiting Time is<span class="Apple-converted-space">  </span>---<span class="Apple-converted-space">  </span>%f",wtavg/n);</span></p>
+<p class="p4"><span class="s1">printf("\nAverage Turnaround Time is --- %f",tatavg/n);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>d) ROUND ROBIN</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">int i,j,n,bu[10],wa[10],tat[10],t,ct[10],max;</span></p>
+<p class="p4"><span class="s1">float awt=0,att=0,temp=0;</span></p>
+<p class="p4"><span class="s1">printf("Enter the no of processes -- ");</span></p>
+<p class="p4"><span class="s1">scanf("%d",&amp;n);</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">printf("\nEnter Burst Time for process %d -- ", i+1);</span></p>
+<p class="p4"><span class="s1">scanf("%d",&amp;bu[i]);</span></p>
+<p class="p4"><span class="s1">ct[i]=bu[i];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">printf("\nEnter the size of time slice -- ");</span></p>
+<p class="p4"><span class="s1">scanf("%d",&amp;t);</span></p>
+<p class="p4"><span class="s1">max=bu[0];</span></p>
+<p class="p4"><span class="s1">for(i=1;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">if(max&lt;bu[i])</span></p>
+<p class="p4"><span class="s1">max=bu[i];</span></p>
+<p class="p4"><span class="s1">for(j=0;j&lt;(max/t)+1;j++)</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">if(bu[i]!=0)</span></p>
+<p class="p4"><span class="s1">if(bu[i]&lt;=t)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">tat[i]=temp+bu[i];</span></p>
+<p class="p4"><span class="s1">temp=temp+bu[i];</span></p>
+<p class="p4"><span class="s1">bu[i]=0;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">else</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">bu[i]=bu[i]-t;</span></p>
+<p class="p4"><span class="s1">temp=temp+t;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1">wa[i]=tat[i]-ct[i];</span></p>
+<p class="p4"><span class="s1">att+=tat[i];</span></p>
+<p class="p4"><span class="s1">awt+=wa[i];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">printf("\n\tPROCESS\t BURST TIME \t WAITING TIME\tTURNAROUND TIME\n");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1">printf("\t%d \t %d \t\t %d \t\t %d \n",i+1,ct[i],wa[i],tat[i]);</span></p>
+<p class="p4"><span class="s1">printf("\nThe Average Turnaround time is -- %f",att/n);</span></p>
+<p class="p4"><span class="s1">printf("\nThe Average Waiting time is -- %f<span class="Apple-converted-space">  </span>",awt/n);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>e) SJF(PREEMPTION)</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">struct process</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>int WT,AT,BT,TAT;</span></p>
+<p class="p4"><span class="s1">};</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">struct process a[10];</span></p>
+<p class="p4"><span class="s1">int main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>int n,temp[10];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>int count=0,t=0,short_P;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>float total_WT=0, total_TAT=0,Avg_WT,Avg_TAT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Enter the number of the process\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>scanf("%d",&amp;n);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Enter the arrival time and burst time of the process\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("AT BT\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">       </span>scanf("%d%d",&amp;a[i].AT,&amp;a[i].BT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">       </span>temp[i]=a[i].BT; // copying the burst time in a temp array for the further use in calculation of WT</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>a[9].BT=10000;<span class="Apple-converted-space">        </span>// we initialize the burst time of a process with the maximum</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(t=0;count!=n;t++)<span class="Apple-converted-space">                    </span>// loop will be execute until all the process</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>{<span class="Apple-converted-space">                                                    </span>// complete so we use count!= number of the process</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>short_P=9; <span class="Apple-converted-space">                                </span>// for finding min burst it is useful</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>if(a[i].BT&lt;a[short_P].BT &amp;&amp; (a[i].AT&lt;=t &amp;&amp; a[i].BT&gt;0))</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>short_P=i;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>a[short_P].BT=a[short_P].BT-1;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>if(a[short_P].BT==0) <span class="Apple-converted-space">                                  </span>// if any process is completed</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>count++; <span class="Apple-converted-space">                                                  </span>// one process complete</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>a[short_P].WT=t+1-a[short_P].AT-temp[short_P];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>a[short_P].TAT=t+1-a[short_P].AT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>total_WT=total_WT+a[short_P].WT;<span class="Apple-converted-space">      </span>// total calculation</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>total_TAT=total_TAT+a[short_P].TAT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Avg_WT=total_WT/n;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Avg_TAT=total_TAT/n;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("P_Id\tWT\tTAT\n"); <span class="Apple-converted-space">      </span>// printing of the answer</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>printf("%d\t%d\t%d\n",i+1,a[i].WT,a[i].TAT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Avg waiting time of the process is %f\n",Avg_WT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Avg turn around time of the process %f\n",Avg_TAT);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>f) PRIORITY((PREEMPTION)</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">struct process</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>int WT,AT,BT,TAT,PT;</span></p>
+<p class="p4"><span class="s1">};</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">struct process a[10];</span></p>
+<p class="p4"><span class="s1">int main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>int n,temp[10],t,count=0,short_p;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>float total_WT=0,total_TAT=0,Avg_WT,Avg_TAT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Enter the number of the process\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>scanf("%d",&amp;n);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Enter the arrival time , burst time and priority of the process\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("AT BT PT\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>scanf("%d%d%d",&amp;a[i].AT,&amp;a[i].BT,&amp;a[i].PT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>temp[i]=a[i].BT; <span class="Apple-converted-space">                    </span>// copying the burst time in a temp array for the further use</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   </span>a[9].PT=10000;<span class="Apple-converted-space">                            </span>// we initialize the burst time of a process with maximum</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(t=0;count!=n;t++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>short_p=9;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>if(a[short_p].PT&gt;a[i].PT &amp;&amp; a[i].AT&lt;=t &amp;&amp; a[i].BT&gt;0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>short_p=i;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>a[short_p].BT=a[short_p].BT-1; <span class="Apple-converted-space">                      </span>// if any process is completed</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>if(a[short_p].BT==0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>count++;<span class="Apple-converted-space">                                              </span>// one process is completed, so count increases by 1</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>a[short_p].WT=t+1-a[short_p].AT-temp[short_p];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>a[short_p].TAT=t+1-a[short_p].AT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>total_WT=total_WT+a[short_p].WT; <span class="Apple-converted-space">                </span>// total calculation</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>total_TAT=total_TAT+a[short_p].TAT;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Avg_WT=total_WT/n;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>Avg_TAT=total_TAT/n;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("ID WT TAT\n"); <span class="Apple-converted-space">                                </span>// printing of the answer</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>for(int i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>printf("%d %d\t%d\n",i+1,a[i].WT,a[i].TAT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Avg waiting time of the process<span class="Apple-converted-space">  </span>is %f\n",Avg_WT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>printf("Avg turn around time of the process is %f\n",Avg_TAT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>return 0;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"><b>2. Simulate the following Process Synchronization techniques<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p2"><span class="s1"><b>a) Bounded-Buffer problem</b></span></p>
+<p class="p2"><span class="s1"><b>b) Readers-Writers problem</b></span></p>
+<p class="p2"><span class="s1"><b>c) Dining philosophers problem using semaphores</b></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"><b>a) Bounded-Buffer problem</b></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p6"><span class="s1">#include &lt;stdio.h&gt;</span></p>
+<p class="p6"><span class="s1">#include &lt;stdlib.h&gt;</span></p>
+<p class="p6"><span class="s1">int mutex = 1, full = 0, empty = 10, x = 0;</span></p>
+<p class="p6"><span class="s1">void producer()</span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">     --mutex;</span></p>
+<p class="p6"><span class="s1">     ++full;</span></p>
+<p class="p6"><span class="s1">     --empty;</span></p>
+<p class="p6"><span class="s1">   <span class="Apple-converted-space">  </span> x++;</span></p>
+<p class="p6"><span class="s1">    printf("\nProducer produces item %d", x);</span></p>
+<p class="p6"><span class="s1">     ++mutex;</span></p>
+<p class="p6"><span class="s1">}</span></p>
+<p class="p6"><span class="s1"> </span></p>
+<p class="p6"><span class="s1">void consumer()</span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">   --mutex;</span></p>
+<p class="p6"><span class="s1">     --full;</span></p>
+<p class="p6"><span class="s1">    ++empty;</span></p>
+<p class="p6"><span class="s1">    printf("\nConsumer consumes item %d",x);</span></p>
+<p class="p6"><span class="s1">    x--;</span></p>
+<p class="p6"><span class="s1"><span class="Apple-converted-space">    </span>++mutex;</span></p>
+<p class="p6"><span class="s1">}</span></p>
+<p class="p6"><span class="s1"> </span></p>
+<p class="p6"><span class="s1">int main()</span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">    int n, i;</span></p>
+<p class="p6"><span class="s1">    printf("\n1. Press 1 for Producer"</span></p>
+<p class="p6"><span class="s1">           "\n2. Press 2 for Consumer"</span></p>
+<p class="p6"><span class="s1">           "\n3. Press 3 for Exit");</span></p>
+<p class="p6"><span class="s1">  </span></p>
+<p class="p6"><span class="s1">    for (i = 1; i &gt; 0; i++)<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">         printf("\nEnter your choice:");</span></p>
+<p class="p6"><span class="s1">        scanf("%d", &amp;n);</span></p>
+<p class="p6"><span class="s1">        switch (n) {</span></p>
+<p class="p6"><span class="s1">        case 1:     </span></p>
+<p class="p6"><span class="s1">            if ((mutex == 1)&amp;&amp; (empty != 0))<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">                producer();</span></p>
+<p class="p6"><span class="s1">            }</span></p>
+<p class="p6"><span class="s1"> </span></p>
+<p class="p6"><span class="s1">            </span></p>
+<p class="p6"><span class="s1">            else<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">                printf("Buffer is full!");</span></p>
+<p class="p6"><span class="s1">            }</span></p>
+<p class="p6"><span class="s1">            break;</span></p>
+<p class="p6"><span class="s1"> </span></p>
+<p class="p6"><span class="s1">        case 2:</span></p>
+<p class="p6"><span class="s1">             if ((mutex == 1)&amp;&amp; (full != 0))</span></p>
+<p class="p6"><span class="s1"><span class="Apple-converted-space"> </span>{</span></p>
+<p class="p6"><span class="s1">                consumer();</span></p>
+<p class="p6"><span class="s1">            }</span></p>
+<p class="p6"><span class="s1">             else<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s1">{</span></p>
+<p class="p6"><span class="s1">                printf("Buffer is empty!");</span></p>
+<p class="p6"><span class="s1">            }</span></p>
+<p class="p6"><span class="s1">            break;</span></p>
+<p class="p6"><span class="s1"> </span></p>
+<p class="p6"><span class="s1">        // Exit Condition</span></p>
+<p class="p6"><span class="s1">        case 3:</span></p>
+<p class="p6"><span class="s1">            exit(0);</span></p>
+<p class="p6"><span class="s1">            break;</span></p>
+<p class="p6"><span class="s1">        }</span></p>
+<p class="p6"><span class="s1">    }</span></p>
+<p class="p6"><span class="s1">}</span></p>
+<p class="p7"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>b) Readers-Writers problem</b></span></p>
+<p class="p8"><span class="s1">#include&lt;semaphore.h&gt;</span></p>
+<p class="p8"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p8"><span class="s1">#include&lt;stdlib.h&gt;</span></p>
+<p class="p8"><span class="s1">#include&lt;unistd.h&gt;</span></p>
+<p class="p8"><span class="s1">#include&lt;pthread.h&gt;</span></p>
+<p class="p8"><span class="s1">sem_t x,y;</span></p>
+<p class="p8"><span class="s1">pthread_t tid;</span></p>
+<p class="p8"><span class="s1">pthread_t writerthreads[100],readerthreads[100];</span></p>
+<p class="p8"><span class="s1">int readercount = 0;</span></p>
+<p class="p9"><span class="s1"></span><br></p>
+<p class="p8"><span class="s1">void *reader(void* param)</span></p>
+<p class="p8"><span class="s1">{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_wait(&amp;x);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>readercount++;</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>if(readercount==1)</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>sem_wait(&amp;y);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_post(&amp;x);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("%d reader is inside\n",readercount);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>usleep(3);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_wait(&amp;x);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>readercount--;</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>if(readercount==0)</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>sem_post(&amp;y);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_post(&amp;x);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("%d Reader is leaving\n",readercount+1);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>return NULL;</span></p>
+<p class="p8"><span class="s1">}</span></p>
+<p class="p9"><span class="s1"></span><br></p>
+<p class="p8"><span class="s1">void *writer(void* param)</span></p>
+<p class="p8"><span class="s1">{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("Writer is trying to enter\n");</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_wait(&amp;y);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("Writer has entered\n");</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_post(&amp;y);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("Writer is leaving\n");</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>return NULL;</span></p>
+<p class="p8"><span class="s1">}</span></p>
+<p class="p9"><span class="s1"></span><br></p>
+<p class="p8"><span class="s1">int main()</span></p>
+<p class="p8"><span class="s1">{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>int n2,i;</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("Enter the number of readers:");</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>scanf("%d",&amp;n2);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>printf("\n");</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>int n1[n2];</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_init(&amp;x,0,1);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>sem_init(&amp;y,0,1);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>for(i=0;i&lt;n2;i++)</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>pthread_create(&amp;writerthreads[i],NULL,reader,NULL);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>pthread_create(&amp;readerthreads[i],NULL,writer,NULL);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>for(i=0;i&lt;n2;i++)</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>pthread_join(writerthreads[i],NULL);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">        </span>pthread_join(readerthreads[i],NULL);</span></p>
+<p class="p8"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p9"><span class="s1"></span><br></p>
+<p class="p8"><span class="s1">}</span></p>
+<p class="p9"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"><b>c) Dining philosophers problem using semaphores</b></span></p>
+<p class="p4"><span class="s1">#include &lt;pthread.h&gt;</span></p>
+<p class="p4"><span class="s1">#include &lt;semaphore.h&gt;</span></p>
+<p class="p4"><span class="s1">#include &lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">#define N 5</span></p>
+<p class="p4"><span class="s1">#define THINKING 2</span></p>
+<p class="p4"><span class="s1">#define HUNGRY 1</span></p>
+<p class="p4"><span class="s1">#define EATING 0</span></p>
+<p class="p4"><span class="s1">#define LEFT (phnum + 4) % N</span></p>
+<p class="p4"><span class="s1">#define RIGHT (phnum + 1) % N</span></p>
+<p class="p4"><span class="s1">int state[N];</span></p>
+<p class="p4"><span class="s1">int phil[N] = { 0, 1, 2, 3, 4 };</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">sem_t mutex;</span></p>
+<p class="p4"><span class="s1">sem_t S[N];</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">void test(int phnum)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>if (state[phnum] == HUNGRY</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&amp;&amp; state[LEFT] != EATING</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&amp;&amp; state[RIGHT] != EATING) {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// state that eating</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>state[phnum] = EATING;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sleep(2);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>printf("Philosopher %d takes fork %d and %d\n",phnum + 1, LEFT + 1, phnum + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>printf("Philosopher %d is Eating\n", phnum + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sem_post(&amp;S[phnum]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">// take up chopsticks</span></p>
+<p class="p4"><span class="s1">void take_fork(int phnum)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_wait(&amp;mutex);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// state that hungry</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>state[phnum] = HUNGRY;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>printf("Philosopher %d is Hungry\n", phnum + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// eat if neighbours are not eating</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>test(phnum);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_post(&amp;mutex);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// if unable to eat wait to be signalled</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_wait(&amp;S[phnum]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sleep(1);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">// put down chopsticks</span></p>
+<p class="p4"><span class="s1">void put_fork(int phnum)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_wait(&amp;mutex);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// state that thinking</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>state[phnum] = THINKING;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">printf("Philosopher %d putting fork %d and %d down\n",phnum + 1, LEFT + 1, phnum + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>printf("Philosopher %d is thinking\n", phnum + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>test(LEFT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>test(RIGHT);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_post(&amp;mutex);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">void* philosopher(void* num)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>while (1)<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>int* i = num;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sleep(1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>take_fork(*i);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sleep(0);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>put_fork(*i);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">int main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>int i;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>pthread_t thread_id[N];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>// initialize the semaphores</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>sem_init(&amp;mutex, 0, 1);</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>for (i = 0; i &lt; N; i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sem_init(&amp;S[i], 0, 0);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>for (i = 0; i &lt; N; i++)<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>// create philosopher processes</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pthread_create(&amp;thread_id[i], NULL,philosopher, &amp;phil[i]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>printf("Philosopher %d is thinking\n", i + 1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>for (i = 0; i &lt; N; i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>pthread_join(thread_id[i], NULL);</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>OUTPUT</b></span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2"><br>
+<br>
+</span><span class="s1"><b>5</b>. Simulate Bankers Algorithm for Dead Lock Avoidance</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">#include&lt;conio.h&gt;</span></p>
+<p class="p4"><span class="s1">int max[100][100],alloc[100][100],need[100][100],avail[100];</span></p>
+<p class="p4"><span class="s1">int n,r;</span></p>
+<p class="p4"><span class="s1">void input();</span></p>
+<p class="p4"><span class="s1">void show();</span></p>
+<p class="p4"><span class="s1">void cal();</span></p>
+<p class="p4"><span class="s1">int main()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int i,j;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("********** Banker's Algorithm ************\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>input();</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>show();</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>cal();</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>getch();</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>return 0;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">void input()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int i,j;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Enter the no of Processes\t");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>scanf("%d",&amp;n);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Enter the no of resources instances\t");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>scanf("%d",&amp;r);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Enter the Max Matrix\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>scanf("%d",&amp;max[i][j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Enter the Allocation Matrix\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p10"><span class="s1"><span class="Apple-converted-space">  </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>scanf("%d",&amp;alloc[i][j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Enter the available Resources\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>scanf("%d",&amp;avail[j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">void show()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int i,j;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("Process\t Allocation\t Max\t Available\t");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\nP%d\t <span class="Apple-converted-space">  </span>",i+1);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("%d ",alloc[i][j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\t");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("%d ",max[i][j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\t");</span></p>
+<p class="p11"><span class="s1"><span class="Apple-converted-space">  </span>if(i==0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("%d ",avail[j]);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">void cal()</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int finish[100],temp,need[100][100],flag=1,k,c1=0;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int safe[100];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>int i,j;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>finish[i]=0;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>//find need matrix</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>need[i][j]=max[i][j]-alloc[i][j];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>printf("\n");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>while(flag)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>flag=0;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>int c=0;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>if((finish[i]==0)&amp;&amp;(need[i][j]&lt;=avail[j]))</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>c++;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>if(c==r)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(k=0;k&lt;r;k++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span></span>avail[k]+=alloc[i][j];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>finish[i]=1;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>flag=1;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>  </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("P%d-&gt;",i);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>if(finish[i]==1)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span></span>i=n;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p10"><span class="s1">}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>for(i=0;i&lt;n;i++)</span></p>
+<p class="p11"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p12"><span class="s1"><span class="Apple-converted-space">  </span>if(finish[i]==1)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>c1++;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>else</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("P%d-&gt;",i);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p11"><span class="s1"><span class="Apple-converted-space"> </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> </span>if(c1==n)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\n The system is in safe state");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1">else</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\n Process are in dead lock");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>printf("\n System is in unsafe state");</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><b>deadlock prevention</b></span></p>
+<p class="p4"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p4"><span class="s1">#include&lt;conio.h&gt;</span></p>
+<p class="p4"><span class="s1">int max[10][10],alloc[10][10],need[10][10],avail[10],i,j,p,r,finish[10]={0},flag=0;</span></p>
+<p class="p4"><span class="s1">main( )</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">printf("\n\nSIMULATION OF DEADLOCK PREVENTION");</span></p>
+<p class="p4"><span class="s1">printf("Enter no. of processes, resources");</span></p>
+<p class="p4"><span class="s1">scanf("%d%d",&amp;p,&amp;r);</span></p>
+<p class="p4"><span class="s1">printf("Enter allocation matrix");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;p;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>scanf("%d",&amp;alloc[i][j]);</span></p>
+<p class="p4"><span class="s1">printf("enter max matrix");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;p;i++) <span class="Apple-converted-space">                            </span>/*reading the maximum matrix and availale</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                                                                          </span>matrix*/</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>scanf("%d",&amp;max[i][j]);</span></p>
+<p class="p4"><span class="s1">printf("enter available matrix");</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;r;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>scanf("%d",&amp;avail[i]);</span></p>
+<p class="p4"><span class="s1">for(i=0;i&lt;p;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>need[i][j]=max[i][j]-alloc[i][j];</span></p>
+<p class="p4"><span class="s1">fun(); /*calling function*/</span></p>
+<p class="p4"><span class="s1">if(flag==0)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>if(finish[i]!=1)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">           </span>printf("\n\n Failing :Mutual exclusion");</span></p>
+<p class="p4"><span class="s1">for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1">{ /*checking for mutual exclusion*/</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">     </span>if(avail[j]&lt;need[i][j])</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>avail[j]=need[i][j];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">fun();</span></p>
+<p class="p4"><span class="s1">printf("\n By allocating required resources to process %d dead lock is prevented" ,i);</span></p>
+<p class="p4"><span class="s1">printf("\n\n lack of no preemption");</span></p>
+<p class="p4"><span class="s1">for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>if(avail[j]&lt;need[i][j])</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span>avail[j]=need[i][j];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>alloc[i][j]=0;</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">fun( );</span></p>
+<p class="p4"><span class="s1">printf("\n\n dead lock is prevented by allocating needed resources");</span></p>
+<p class="p4"><span class="s1">printf(" \n \n failing:Hold and Wait condition ");</span></p>
+<p class="p4"><span class="s1">for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1">{<span class="Apple-converted-space">                          </span>/*checking hold and wait condition*/</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">           </span>if(avail[j]&lt;need[i][j])</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">               </span>avail[j]=need[i][j];</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">fun( );</span></p>
+<p class="p4"><span class="s1">printf("\n AVOIDING ANY ONE OF THE CONDITION, U CAN PREVEMT DEADLOCK");</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">getch( );</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p4"><span class="s1">fun( )</span></p>
+<p class="p4"><span class="s1">{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   </span>while(1)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">   </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">       </span>for(flag=0,i=0;i&lt;p;i++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">       </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>if(finish[i]==0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      <span class="Apple-tab-span">	</span></span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>if(need[i][j]&lt;=avail[j])</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>continue;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>else</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>break;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                         </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                   </span>if(j==r)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                   </span>{</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                        </span>for(j=0;j&lt;r;j++)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>avail[j]+=alloc[i][j];</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>flag=1;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>finish[i]=1;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                 </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">           </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">           </span>if(flag==0)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">               </span>break;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p4"><span class="s1">}</span></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1">6. Simulate the following page replacement algorithms.</span></p>
+<p class="p2"><span class="s1">a) FIFO<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">b) LRU<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p13"><span class="s1"><b><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span>FIFO<span class="Apple-converted-space"> </span></b></span></p>
+<p class="p2"><span class="s1">#include&lt;stdio.h&gt;<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">main()<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">{ <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">int i, j, k, f, pf=0, count=0, rs[25], m[10], n; <span class="Apple-converted-space">   </span></span></p>
+<p class="p2"><span class="s1">printf("\n Enter the length of reference string -- "); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;n); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">printf("\n Enter the reference string -- "); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;n;i++)<span class="Apple-converted-space">   </span></span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;rs[i]); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">printf("\n Enter no. of frames -- "); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;f); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;f;i++)<span class="Apple-converted-space">   </span></span></p>
+<p class="p2"><span class="s1">m[i]=-1;<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">printf("\n The Page Replacement Process is -- \n"); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;n;i++) <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">{<span class="Apple-converted-space">   </span></span></p>
+<p class="p14"><span class="s1">for(k=0;k&lt;f;k++)<span class="Apple-converted-space">   </span></span></p>
+<p class="p14"><span class="s1">{ <span class="Apple-converted-space">   </span></span></p>
+<p class="p15"><span class="s1">if(m[k]==rs[i])<span class="Apple-converted-space">     </span></span></p>
+<p class="p15"><span class="s1">break;<span class="Apple-converted-space">   </span></span></p>
+<p class="p14"><span class="s1">}<span class="Apple-converted-space">   </span></span></p>
+<p class="p15"><span class="s1">if(k==f) <span class="Apple-converted-space"> </span></span></p>
+<p class="p15"><span class="s1">{ <span class="Apple-converted-space">   </span></span></p>
+<p class="p15"><span class="s1">m[count++]=rs[i];<span class="Apple-converted-space">   </span></span></p>
+<p class="p15"><span class="s1">pf++;<span class="Apple-converted-space">   </span></span></p>
+<p class="p15"><span class="s1">}<span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">for(j=0;j&lt;f;j++) <span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">printf("\t%d",m[j]);<span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">if(k==f) <span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">printf("\tPF No. %d",pf);<span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">printf("\n");<span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">if(count==f) <span class="Apple-converted-space">   </span></span></p>
+<p class="p16"><span class="s1">count=0; <span class="Apple-converted-space"> </span></span></p>
+<p class="p14"><span class="s1"><span class="Apple-converted-space">  </span>} <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">printf("\n The number of Page Faults using FIFO are %d",pf); <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p13"><span class="s1"><span class="Apple-tab-span">	</span>•<span class="Apple-tab-span">	</span>LRU<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">#include&lt;stdio.h&gt;</span></p>
+<p class="p2"><span class="s1">main()</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">int i, j , k, min, rs[25], m[10], count[10], flag[25], n, f, pf=0, next=1;</span></p>
+<p class="p2"><span class="s1">printf("Enter the length of reference string --<span class="Apple-converted-space">  </span>");</span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;n);</span></p>
+<p class="p2"><span class="s1">printf("Enter the reference string -- ");</span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;rs[i]);</span></p>
+<p class="p2"><span class="s1">flag[i]=0;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">printf("Enter the number of frames --<span class="Apple-converted-space">  </span>");</span></p>
+<p class="p2"><span class="s1">scanf("%d",&amp;f);</span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;f;i++)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">count[i]=0;</span></p>
+<p class="p2"><span class="s1">m[i]=-1;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">printf("\nThe Page Replacement process is -- \n");</span></p>
+<p class="p2"><span class="s1">for(i=0;i&lt;n;i++)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">for(j=0;j&lt;f;j++)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">if(m[j]==rs[i])</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">flag[i]=1;</span></p>
+<p class="p2"><span class="s1">count[j]=next;</span></p>
+<p class="p2"><span class="s1">next++;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">if(flag[i]==0)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">if(i&lt;f)</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">m[i]=rs[i];</span></p>
+<p class="p2"><span class="s1">count[i]=next;</span></p>
+<p class="p2"><span class="s1">next++;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">else</span></p>
+<p class="p2"><span class="s1">{</span></p>
+<p class="p2"><span class="s1">min=0;</span></p>
+<p class="p2"><span class="s1">for(j=1;j&lt;f;j++)</span></p>
+<p class="p2"><span class="s1">if(count[min] &gt; count[j])</span></p>
+<p class="p2"><span class="s1">min=j;</span></p>
+<p class="p2"><span class="s1">m[min]=rs[i];</span></p>
+<p class="p2"><span class="s1">count[min]=next;</span></p>
+<p class="p2"><span class="s1">next++;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">pf++;</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">for(j=0;j&lt;f;j++)</span></p>
+<p class="p2"><span class="s1">printf("%d\t", m[j]);</span></p>
+<p class="p2"><span class="s1">if(flag[i]==0)</span></p>
+<p class="p2"><span class="s1">printf("PF No. -- %d" , pf);</span></p>
+<p class="p2"><span class="s1">printf("\n");</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p2"><span class="s1">printf("\nThe number of page faults using LRU are %d",pf);</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p17"><span class="s1"></span><br></p>
+<p class="p17"><span class="s1"></span><br></p>
+<p class="p17"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+<p class="p5"><span class="s1"></span><br></p>
+</body>
+</html>
